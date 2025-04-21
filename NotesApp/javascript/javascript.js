@@ -21,17 +21,17 @@
                 let ele=document.createElement("div");
                 ele.setAttribute('class','abc');
                 ele.innerHTML=`<div><h3>${data[i].title}</h3>${data[i].content}</div><button class="close">X</button>`;
-                ele.children[1].addEventListener('click',()=>{
-                    for(let j=0;j<list.length;j++)
-                        {
-                            if(list[j]["title"]==ele.children[0].children[0].innerHTML)
-                                {
-                                    list.splice(j,1);
-                                }
-                        }
-                    out.remove();
-                    localStorage.setItem("notes",JSON.stringify(list));
-                })
+                // ele.children[1].addEventListener('click',()=>{
+                //     for(let j=0;j<list.length;j++)
+                //         {
+                //             if(list[j]["title"]==ele.children[0].children[0].innerHTML)
+                //                 {
+                //                     list.splice(j,1);
+                //                 }
+                //         }
+                //     out.remove();
+                //     localStorage.setItem("notes",JSON.stringify(list));
+                // })
                 out.appendChild(ele);
                 out.appendChild(date);
                 out.appendChild(time);
@@ -53,17 +53,17 @@
             let ele=document.createElement("div");
             ele.setAttribute('class','abc');
             ele.innerHTML=`<div><h3>${title.value}</h3>${note.value}</div><button class="close">X</button>`;
-            ele.children[1].addEventListener('click',()=>{
-                for(let j=0;j<list.length;j++)
-                    {
-                        if(list[j]["title"]==ele.children[0].children[0].innerHTML)
-                        {
-                            list.splice(j,1);
-                        }
-                    }
-                out.remove();
-                localStorage.setItem("notes",JSON.stringify(list));
-            })
+            // ele.children[1].addEventListener('click',()=>{
+            //     for(let j=0;j<list.length;j++)
+            //         {
+            //             if(list[j]["title"]==ele.children[0].children[0].innerHTML)
+            //             {
+            //                 list.splice(j,1);
+            //             }
+            //         }
+            //     out.remove();
+            //     localStorage.setItem("notes",JSON.stringify(list));
+            // })
             out.appendChild(ele);
             out.appendChild(date);
             out.appendChild(time);
@@ -73,4 +73,21 @@
             localStorage.setItem("notes",json);
             
         })
+        container.addEventListener("click",(ele)=>{
+            if(ele.target.matches(".close"))
+            {
+                let sibling=ele.target.previousElementSibling;
+                for(let j=0;j<list.length;j++)
+                {
+                    if(list[j]["title"]==sibling.children[0].innerHTML)
+                    {
+                        list.splice(j,1);
+                        break;
+                    }
+                }
+                ele.target.parentElement.parentElement.remove();
+                localStorage.setItem("notes",JSON.stringify(list));
+            }
+        })
+
         
